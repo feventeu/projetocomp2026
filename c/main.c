@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "figurinha.h"
 #include "arquivo.h"
@@ -14,6 +15,8 @@ int main() {
 
     int total = 0;
     int opcao;
+    // inicializa random
+    srand(time(NULL));
 
     // tenta carregar dados
     carregarBinario(&album, &total);
@@ -29,12 +32,13 @@ int main() {
         printf("7 - Exportar CSV\n");
         printf("8 - Abrir pacote\n");
         printf("9 - Ver faltantes\n");
-        printf("10 - ABRIR INTERFACE GRÁFICA (Raylib) 🚀\n"); // <-- Nova Linha!
+        printf("10 -Interface gráfica \n");
         printf("0 - Sair\n");
         printf("Opcao: ");
         
         scanf("%d", &opcao);
 
+        char codigo[20];
         switch (opcao) {
             case 1:
                 cadastrarFigurinha(&album, &total);
@@ -45,7 +49,6 @@ int main() {
                 break;
 
             case 3: 
-                char codigo[20];
                 printf("\nCodigo: ");
                 scanf("%s", codigo);
                 int pos = buscarFigurinha(album, total, codigo);
@@ -83,8 +86,8 @@ int main() {
                 break;
 
             case 10:
-                printf("Abrindo a janela gráfica... Use o mouse por lá!\n");
-                abrir_sistema_grafico(album, total); // <-- Adicione (album, total) aqui!
+                printf("Abrindo a janela gráfica...\n");
+                abrir_sistema_grafico(album, total);
                 break;
 
             case 0:

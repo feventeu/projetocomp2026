@@ -7,8 +7,7 @@
 
 
 // cadastra figurinha
-void cadastrarFigurinha(Figurinha **album,
-                        int *total) {
+void cadastrarFigurinha(Figurinha **album, int *total) {
 
     // aumenta vetor
     *album = realloc(*album, (*total + 1)* sizeof(Figurinha));
@@ -19,8 +18,7 @@ void cadastrarFigurinha(Figurinha **album,
         return;
     }
 
-    Figurinha *nova =
-    &(*album)[*total];
+    Figurinha *nova = &(*album)[*total];
 
     printf("\nCodigo: ");
     scanf("%s", nova->codigo);
@@ -58,9 +56,7 @@ void listarFigurinhas(Figurinha *album, int total) {
 
     printf("\n===== FIGURINHAS =====\n");
 
-    for (int i = 0;
-         i < total;
-         i++) {
+    for (int i = 0; i < total; i++) {
 
         printf("\nFigurinha %d\n",i + 1);
 
@@ -171,29 +167,52 @@ void abrirPacote(Figurinha *album, int total) {
 
     printf("\n===== PACOTE =====\n");
 
-    // inicializa random
-    srand(time(NULL));
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 7; i++) {
 
         int sorteada = rand() % total;
 
+        int opcao;
         album[sorteada].quantidade++;
 
-        album[sorteada].colada = 1;
+        printf("\nFigurinha %d\n", i + 1);
+        printf("Codigo: %s\n", album[sorteada].codigo);
+        printf("Titulo: %s\n", album[sorteada].titulo);
 
-        printf("\nFigurinha %d\n",i + 1);
+        printf("\n1 - Colar no album");
+        printf("\n2 - Guardar para troca");
+        printf("\nEscolha: ");
+        scanf("%d", &opcao);
 
         printf("%s\n", album[sorteada].titulo);
 
         // verifica repetida
         if (album[sorteada].quantidade > 1) {
 
-            printf("REPETIDA!\n");
+            printf("repetida!\n");
 
         } else {
 
-            printf("NOVA!\n");
+            printf("nova!\n");
+        }
+        if (opcao == 1) {
+
+        if (album[sorteada].colada == 0) {
+            album[sorteada].colada = 1;
+            printf("Figurinha colada!\n");
+        } else {
+            album[sorteada].quantidade++;
+            printf("Voce ja tinha essa figurinha. Ela foi para troca.\n");
+        }
+
+        } else if (opcao == 2) {
+
+            album[sorteada].quantidade++;
+            printf("Figurinha guardada para troca.\n");
+
+        } else {
+
+            printf("Opcao invalida.\n");
         }
     }
 }

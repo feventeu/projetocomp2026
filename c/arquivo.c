@@ -65,15 +65,12 @@ void carregarCSV(Figurinha **album, int *total) {
 
     fclose(arquivo);
 
-    printf(
-    "CSV carregado!\n");
+    printf("CSV carregado!\n");
 }
-
 
 // salva binario
 void salvarBinario(
-Figurinha *album,
-int total) {
+Figurinha *album, int total) {
 
     FILE *arquivo;
 
@@ -82,7 +79,6 @@ int total) {
     if (arquivo == NULL) {
 
         printf("Erro ao salvar.\n");
-
         return;
     }
 
@@ -122,8 +118,7 @@ void carregarBinario(Figurinha **album, int *total) {
     *album =  malloc((*total)* sizeof(Figurinha));
 
     // le vetor
-    fread(*album,
-    sizeof(Figurinha), *total, arquivo);
+    fread(*album, sizeof(Figurinha), *total, arquivo);
 
     fclose(arquivo);
 
@@ -132,9 +127,7 @@ void carregarBinario(Figurinha **album, int *total) {
 
 
 // exporta csv
-void exportarCSV(
-Figurinha *album,
-int total) {
+void exportarCSV(Figurinha *album, int total) {
 
     FILE *arquivo;
 
@@ -152,13 +145,7 @@ int total) {
 
     for (int i = 0; i < total; i++) {
 
-        fprintf(arquivo,"%s,%s,%s,%s,%s\n",
-
-        album[i].codigo,
-        album[i].titulo,
-        album[i].secao,
-        album[i].grupo,
-        album[i].tipo);
+        fprintf(arquivo,"%s,%s,%s,%s,%s\n", album[i].codigo, album[i].titulo, album[i].secao,  album[i].grupo, album[i].tipo);
     }
 
     fclose(arquivo);

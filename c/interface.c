@@ -86,7 +86,9 @@ static TelaAtual gerenciar_cliques_menu(int larguraTela) {
         DrawRectangleRec(btnTrocas, YELLOW);
         DrawRectangleLinesEx(btnTrocas, 2, YELLOW);
         DrawText("3. Abrir Pacotes / Trocas Virtuais", btnTrocas.x + 30, btnTrocas.y + 18, 20, BLACK);
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) proximaTela = TELA_TROCAS;
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            proximaTela = TELA_TROCAS;
+        }
     } else {
         DrawRectangleRec(btnTrocas, corFundoBotao);
         DrawRectangleLinesEx(btnTrocas, 2, corBordaBotao);
@@ -98,7 +100,9 @@ static TelaAtual gerenciar_cliques_menu(int larguraTela) {
         DrawRectangleRec(btnSair, RED);
         DrawRectangleLinesEx(btnSair, 2, RED);
         DrawText("0. Fechar Interface Gráfica", btnSair.x + 30, btnSair.y + 18, 20, WHITE);
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) proximaTela = TELA_SAIR;
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            proximaTela = TELA_SAIR
+        }
     } else {
         DrawRectangleRec(btnSair, corFundoBotao);
         DrawRectangleLinesEx(btnSair, 2, corBordaBotao);
@@ -170,13 +174,13 @@ void abrir_sistema_grafico(Figurinha *album, int total) {
                 DrawRectangleLinesEx((Rectangle){50, 300, 700, 40}, 2, corBordaCaixa);
 
                 if (porcentagemGeral == 100.0f) {
-                    DrawText("Parabéns! Você completou o álbum! 🏆", 50, 370, 20, GOLD);
+                    DrawText("Parabéns! Você completou o álbum!", 50, 370, 20, GOLD);
                 } 
                 else if (porcentagemGeral > 50.0f) {
-                    DrawText("Mais da metade já foi! Continue abrindo pacotes! 🎉", 50, 370, 18, LIME);
+                    DrawText("Mais da metade já foi! Continue abrindo pacotes!", 50, 370, 18, LIME);
                 } 
                 else {
-                    DrawText("Seu álbum está no começo. Rumo ao Hexa! ⚽", 50, 370, 18, LIGHTGRAY);
+                    DrawText("Seu álbum está no começo. Rumo ao Hexa!", 50, 370, 18, LIGHTGRAY);
                 }
 
                 DrawRectangle(0, 540, larguraTela, 60, modoClaro ? LIGHTGRAY : DARKGRAY);
@@ -203,8 +207,10 @@ void abrir_sistema_grafico(Figurinha *album, int total) {
                 
                 for (int i = 0; i < FIGURINHAS_POR_PAGINA; i++) {
                     int indiceFigurinha = inicioIndice + i;
-                    if (indiceFigurinha >= total) break; 
+                    if (indiceFigurinha >= total){
+                        break; 
 
+                    }
                     int coluna = i % 3;
                     int linha = i / 3;
                     int x = 60 + (coluna * 240);
@@ -212,12 +218,12 @@ void abrir_sistema_grafico(Figurinha *album, int total) {
 
                     Rectangle card = { x, y, 200, 160 };
 
-                    // 💎 Sincronizado com os campos exatos do seu figurinha.h
+                    //Sincronizado com os campos exatos do seu figurinha.h
                     if (album[indiceFigurinha].colada == 1) {
                         DrawRectangleRec(card, modoClaro ? LIGHTGRAY : DARKGRAY);
                         DrawRectangleLinesEx(card, 3, LIME);
                         
-                        // Como .codigo é char[], usamos %s
+                        // string
                         DrawText(TextFormat("Cód: %s", album[indiceFigurinha].codigo), x + 15, y + 15, 20, YELLOW);
                         DrawText(album[indiceFigurinha].titulo, x + 15, y + 50, 16, corTextoGeral);
                         DrawText(album[indiceFigurinha].secao, x + 15, y + 80, 14, LIGHTGRAY);
@@ -257,7 +263,9 @@ void abrir_sistema_grafico(Figurinha *album, int total) {
 
             case TELA_TROCAS:
                 DrawText("EM CONSTRUÇÃO: Sistema de Trocas", 50, 150, 24, corTextoGeral);
-                if (IsKeyPressed(KEY_BACKSPACE)) telaAtual = TELA_MENU;
+                if (IsKeyPressed(KEY_BACKSPACE)) {
+                    telaAtual = TELA_MENU;
+                }
                 break;
 
             default:

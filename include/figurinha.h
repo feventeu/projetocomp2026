@@ -13,6 +13,7 @@ typedef struct {
     // 0 = nao tem
     // 1 = ja conseguiu
     int colada;
+    int trocas;
 
     // quantidade da figurinha
     int quantidade;
