@@ -101,7 +101,7 @@ static TelaAtual gerenciar_cliques_menu(int larguraTela) {
         DrawRectangleLinesEx(btnSair, 2, RED);
         DrawText("0. Fechar Interface Gráfica", btnSair.x + 30, btnSair.y + 18, 20, WHITE);
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            proximaTela = TELA_SAIR
+            proximaTela = TELA_SAIR;
         }
     } else {
         DrawRectangleRec(btnSair, corFundoBotao);
@@ -261,12 +261,61 @@ void abrir_sistema_grafico(Figurinha *album, int total) {
                 break;
             }
 
-            case TELA_TROCAS:
-                DrawText("EM CONSTRUÇÃO: Sistema de Trocas", 50, 150, 24, corTextoGeral);
+            case TELA_TROCAS: {
+                int repetida = -1;
+                int faltante = -1;
+
+                for (int i = 0; i < total; i++) {
+                    if (album[i].quantidade > 0) {
+                        repetida = i;
+                        break;
+                    }
+                }   
+
+                for (int i = 0; i < total; i++) {
+                    if (album[i].colada == 0) {
+                        faltante = i;
+                        break;
+                    }
+                }
+
+                DrawRectangle(0, 0, larguraTela, 90, ORANGE);
+                DrawText("SISTEMA DE TROCAS", 40, 25, 28, WHITE);
+                DrawText("Pressione [BACKSPACE] para voltar", 40, 560, 16, corTextoGeral);
+
+                if (repetida == -1) {
+                    DrawText("Voce nao possui figurinhas repetidas.", 130, 260, 24, RED);
+                } else if (faltante == -1) {
+                    DrawText("Parabens! Album completo!", 220, 260, 28, LIME);
+                } else {
+                    DrawText("VOCE ENTREGA", 120, 130, 24, MAROON);
+                    DrawRectangle(100, 180, 220, 260, modoClaro ? LIGHTGRAY : DARKGRAY);
+                    DrawRectangleLines(100, 180, 220, 260, BLACK);
+                    DrawText(album[repetida].codigo, 130, 220, 24, BLACK);
+                    DrawText(album[repetida].titulo, 130, 270, 18, BLACK);
+                    DrawText("REPETIDA", 135, 370, 22, MAROON);
+
+                    DrawText("VOCE RECEBE", 500, 130, 24, DARKGREEN);
+                    DrawRectangle(480, 180, 220, 260, modoClaro ? RAYWHITE : DARKGRAY);
+                    DrawRectangleLines(480, 180, 220, 260, BLACK);
+                    DrawText(album[faltante].codigo, 510, 220, 24, BLACK);
+                    DrawText(album[faltante].titulo, 510, 270, 18, BLACK);
+                    DrawText("NOVA", 555, 370, 22, DARKGREEN);
+
+                    DrawText("Pressione [ENTER] para aceitar a troca", 170, 480, 22, corTextoGeral);
+
+                    if (IsKeyPressed(KEY_ENTER)) {
+                        album[repetida].quantidade--;
+                        album[faltante].colada = 1;
+                    }
+                }   
+
                 if (IsKeyPressed(KEY_BACKSPACE)) {
                     telaAtual = TELA_MENU;
                 }
+
                 break;
+            }
 
             default:
                 break;

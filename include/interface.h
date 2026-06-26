@@ -14,5 +14,6 @@ typedef enum {
 
 // Agora a função recebe o ponteiro do álbum e a quantidade de figurinhas
 void abrir_sistema_grafico(Figurinha *album, int total);
+void desenharTrocas(Figurinha *album, int total);
 
 #endif
